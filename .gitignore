@@ -29,3 +29,10 @@ flasher_args.json
 ldgen_libraries
 ldgen_libraries.in
 sdkconfig.old
+.bin_timestamp
+project_elf_src_esp32.c
+switch.bin
+switch.elf
+switch.map
+x509_crt_bundle.S
+
