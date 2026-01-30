@@ -23,10 +23,17 @@ rm -fr managed_components
 rm -fr partition_table
 rm partition-table-flash_args
 rm project_description.json
-rm sdkconfig
 rm component_manager_run_counter.*
 rm flash_*
 rm flasher_args.json
 rm ldgen_libraries
 rm ldgen_libraries.in
 rm sdkconfig.old
+
+rm .bin_timestamp
+rm project_elf_src_esp32.c
+rm switch.bin
+rm switch.elf
+rm switch.map
+rm x509_crt_bundle.S
+

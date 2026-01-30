@@ -22,7 +22,6 @@ managed_components
 partition_table
 partition-table-flash_args
 project_description.json
-sdkconfig
 component_manager_run_counter.*
 flash_*
 flasher_args.json
