@@ -2,13 +2,10 @@
 #include "common.h"
 #include "terminal.h"
 #include "led.h"
-#include "i2csys.h"
 
 
 void app_main(void)
 {
-	i2c_master_init();
-
 	xTaskCreate(TaskMainLed,
 			"Task Flash" ,
 			configMINIMAL_STACK_SIZE ,
