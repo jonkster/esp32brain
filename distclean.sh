@@ -19,6 +19,7 @@ rm -fr gdbinit
 rm kconfigs.in
 rm kconfigs_projbuild.in
 rm Makefile
+rm -fr managed_components
 rm -fr partition_table
 rm partition-table-flash_args
 rm project_description.json
