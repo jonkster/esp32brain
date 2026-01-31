@@ -37,6 +37,20 @@ void registerCommands(void)
 			.hint = NULL,
 			.func = &reboot,
 		}, {
+			.command = "relay_set",
+			.help = "Set state of relay\n"
+				"\teg: relay_set 2 1\n"
+				"\t\tset relay #2 on",
+			.hint = "nn <0|1>",
+			.func = &setRelay,
+		}, {
+			.command = "relay_get",
+			.help = "Get state of relay\n"
+				"\teg:relay_get 2\n"
+				"\t\tget state of relay #2",
+			.hint = "nn",
+			.func = &getRelay,
+		}, {
 			.command = "system",
 			.help = "Display system information",
 			.hint = NULL,

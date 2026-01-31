@@ -35,6 +35,33 @@ int reboot(int argc, char **argv)
 	return 0;
 }
 
+int setRelay(int argc, char **argv)
+{
+	if (argc < 2) {
+		printf("no relay specified: useage: setRelay nn <0|1>\n");
+		return 1;
+	}
+	if (argc < 3) {
+		printf("no relay value specified: useage: setRelay nn <0|1>\n");
+		return 1;
+	}
+	const char* relayNum = argv[1];
+	const char* relayVal = argv[2];
+	printf("setRelay #%s to %s, not implemented yet\n", relayNum, relayVal);
+	return 1;
+}
+
+int getRelay(int argc, char **argv)
+{
+	if (argc < 2) {
+		printf("no relay specified: useage: getRelay nnn\n");
+		return 1;
+	}
+	const char* relayNum = argv[1];
+	printf("getRelay #%s, not implemented yet\n", relayNum);
+	return 1;
+}
+
 int systemStats(int argc, char **argv)
 {
 	esp_chip_info_t chip_info;
