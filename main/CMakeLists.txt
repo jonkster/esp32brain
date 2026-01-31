@@ -1,8 +1,7 @@
 idf_component_register(
 	SRC_DIRS "."
 	INCLUDE_DIRS "." "include"
-	PRIV_REQUIRES "console driver vfs esp_driver_uart esp_app_format nvs_flash esp_psram esp_wifi esp-tls json"
-)
+	PRIV_REQUIRES "console driver vfs esp_driver_uart esp_app_format nvs_flash esp_psram esp_wifi esp-tls json esp_driver_rmt")
 
 # updates the version.txt file based on git hash each compile
 add_custom_command(

@@ -2,10 +2,13 @@
 #include "common.h"
 #include "terminal.h"
 #include "led.h"
+#include "ws2812_led.h"
 
 
 void app_main(void)
 {
+	colourSetup();
+
 	xTaskCreate(TaskMainLed,
 			"Task Flash" ,
 			configMINIMAL_STACK_SIZE ,
