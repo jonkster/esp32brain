@@ -81,12 +81,15 @@ void initialiseConsole(void)
 void TaskTerminal(void *pvParameters) {
 	(void)pvParameters;
 
+	printf(ANSI_BG_GREEN ANSI_BLACK "\n------------------------------------\n");
 	uname(0, NULL);
 	version(0, NULL);
+	printf("------------------------------------\n");
+	printf(ANSI_BOLD_WHITE "Ctrl+] to exit monitor" "\n");
+	printf("type help for help" ANSI_RESET "\n\n");
 
 	initialiseConsole();
 	registerCommands();
-	printf("Ctrl+] to exit monitor\n");
 
 	for (;;) {
 

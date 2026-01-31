@@ -7,7 +7,7 @@
 #include "freertos/task.h"
 #include "esp_log.h"
 
-#define UNAME "Brain (c)2024 Jon Kelly"
+#define UNAME "Brain (c)2026 Jon Kelly"
 
 
 #define ARRAY_LENGTH(x) (sizeof(x) / sizeof((x)[0]))
@@ -15,12 +15,14 @@
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 
+#define ANSI_BLACK "\x1b[30m"
 #define ANSI_RED "\x1b[31m"
 #define ANSI_GREEN "\x1b[32m"
 #define ANSI_YELLOW "\x1b[33m"
 #define ANSI_BLUE "\x1b[34m"
 #define ANSI_MAGENTA "\x1b[35m"
 #define ANSI_CYAN "\x1b[36m"
+#define ANSI_WHITE "\x1b[37m"
 #define ANSI_RESET "\x1b[0m"
 #define ANSI_BG_BLACK "\x1b[40m"
 #define ANSI_BG_RED "\x1b[41m"
