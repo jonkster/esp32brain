@@ -2,11 +2,15 @@
 
 This framework can be used to start various projects using ESP32 development boards.
 
-It provides some basic functionality and skeleton code including:
+It provides some basic functionality including:
 1. a simple terminal/console interface
-2. flashing LEDs
+2. flashing LED system
+3. skeleton for adding other functionality
 
-The code was built using a Freenove ESP32 WROOM Development Board
+The code was built using a Freenove ESP32 WROOM Development Board:
+![Freenove ESP32-WROOM-S3](https://github.com/jonkster/esp32brain/blob/mainbranch/doc/images/freenove_wroom.jpg)
+
+Using other boards will require adjustment.
 
 ## Setting up development environment (ESP-IDF)
 
@@ -56,14 +60,11 @@ make all flash monitor
 To clean up project to raw essential files:
 ```
 distclean.sh
+# Following this, you will need to run:
+ cmake .
 ```
 
-To set up project infrastructure
-```
-setup.sh
-```
-
-To get a generic framework that can be used to build other ESP32 projects, use version tagged v0.1
+To get a simple generic framework that can be used to build other ESP32 projects, currently use version tagged v0.1 on mainbranch
 ```
 git show -s --format='' --color v0.1
 tag v0.1
