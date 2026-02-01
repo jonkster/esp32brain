@@ -10,6 +10,7 @@
 #include "common.h"
 #include "commands.h"
 #include "terminal.h"
+#include "relay.h"
 #include "ws2812_led.h"
 
 #define PROMPT_STR			ANSI_BOLD_YELLOW ANSI_BG_BLUE CONFIG_IDF_TARGET "-brain>" ANSI_RESET " "
@@ -37,19 +38,24 @@ void registerCommands(void)
 			.hint = NULL,
 			.func = &reboot,
 		}, {
-			.command = "relay_set",
+			.command = "rs",
 			.help = "Set state of relay\n"
 				"\teg: relay_set 2 1\n"
 				"\t\tset relay #2 on",
 			.hint = "nn <0|1>",
 			.func = &setRelay,
 		}, {
-			.command = "relay_get",
+			.command = "rg",
 			.help = "Get state of relay\n"
 				"\teg:relay_get 2\n"
 				"\t\tget state of relay #2",
 			.hint = "nn",
 			.func = &getRelay,
+		}, {
+			.command = "rd",
+			.help = "test relays\n",
+			.hint = NULL,
+			.func = &relayDance,
 		}, {
 			.command = "system",
 			.help = "Display system information",

@@ -19,6 +19,7 @@
 #include "commands.h"
 #include "led.h"
 #include "ws2812_led.h"
+#include "relay.h"
 
 static const char* TAG = "commands";
 
@@ -45,10 +46,10 @@ int setRelay(int argc, char **argv)
 		printf("no relay value specified: useage: setRelay nn <0|1>\n");
 		return 1;
 	}
-	const char* relayNum = argv[1];
-	const char* relayVal = argv[2];
-	printf("setRelay #%s to %s, not implemented yet\n", relayNum, relayVal);
-	return 1;
+	const uint8_t relayNum = strtol(argv[1], NULL, 10);
+	const bool relayVal = strtol(argv[2], NULL, 10);
+	relaySet(relayNum, relayVal);
+	return 0;
 }
 
 int getRelay(int argc, char **argv)

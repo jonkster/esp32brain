@@ -3,11 +3,13 @@
 #include "terminal.h"
 #include "led.h"
 #include "ws2812_led.h"
+#include "relay.h"
 
 
 void app_main(void)
 {
 	colourSetup();
+	initRelays();
 
 	xTaskCreate(TaskMainLed,
 			"Task Flash" ,
