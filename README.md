@@ -116,28 +116,34 @@ esp32-brain>
 
 You need to setup ESP-IDF and then the ESP32Brain framework:
 
-### 1. Install ESP-IDF
+### 1. Install ESP-IDF  (@ 2026/10/2026)
 
-Follow instructions at https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html
+**Follow instructions at https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html**
 
-basically process is:
+The idea is to install the Espresif Installation Manager (EIM)
+
+Basically process is :
+
 ```
-# make sure you have python3
-python3 --version
+   sudo curl -fsSL https://dl.espressif.com/dl/eim/eim.gpg -o /etc/apt/keyrings/eim.gpg
+   sudo chmod 0644 /etc/apt/keyrings/eim.gpg
+   sudo curl -fsSL https://dl.espressif.com/dl/eim/eim.sources -o /etc/apt/sources.list.d/espressif.sources
+   sudo apt update
+   sudo apt install eim-cli
+```
 
-# get ESP-IDF
-mkdir -p ~/esp
-cd ~/esp
+NB to update esp-idf at a later date
+```
+sudo apt update && sudo apt upgrade eim
+```
 
-# this was initially developed with esp-idf v5.5.2.  Adjust as required
-git clone -b v5.5.2 --recursive https://github.com/espressif/esp-idf.git
-
+Then set up for correct ESP32 build environment
+```
 cd ~/esp/esp-idf
 ./install.sh esp32
 
 cd esp-idf/
 . $HOME/esp/esp-idf/export.sh
-
 ```
 
 ### 2. ESP32Brain Framework
