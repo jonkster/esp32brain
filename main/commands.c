@@ -18,16 +18,9 @@
 #include "common.h"
 #include "commands.h"
 #include "led.h"
-#include "ws2812_led.h"
 
 static const char* TAG = "commands";
 
-
-int alertLed(int argc, char **argv)
-{
-	flashColourLed();
-	return 0;
-}
 
 int reboot(int argc, char **argv)
 {

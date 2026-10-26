@@ -10,7 +10,6 @@
 #include "common.h"
 #include "commands.h"
 #include "terminal.h"
-#include "ws2812_led.h"
 
 #define PROMPT_STR			ANSI_BOLD_YELLOW ANSI_BG_BLUE CONFIG_IDF_TARGET "-brain>" ANSI_RESET " "
 #define CONSOLE_MAX_CMDLINE_ARGS	8
@@ -22,11 +21,6 @@ void registerCommands(void)
 
 	const esp_console_cmd_t commands[] = {
 		{
-			.command = "alert",
-			.help = "Flash the alert LED",
-			.hint = NULL,
-			.func = &alertLed,
-		}, {
 			.command = "ps",
 			.help = "Get information about running tasks",
 			.hint = NULL,
