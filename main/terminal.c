@@ -122,7 +122,6 @@ void TaskTerminal(void *pvParameters) {
 			linenoiseFree(line);
 		}
 		vTaskDelay(500 / portTICK_PERIOD_MS);
-
 	}
 }
 

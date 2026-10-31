@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define LED GPIO_NUM_2
-#define LED_FLASH_PERIOD_MS 2000
+#define LED_FLASH_PERIOD_MS 750
 
 void setBlinkPeriod(int period);
 
