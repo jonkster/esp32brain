@@ -129,6 +129,7 @@ CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
 CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
 ```
 
+
 ### To build sdkconfig
 
 First, edit any default values for the board in main/Kconfig.projbuild eg
@@ -162,22 +163,60 @@ make menuconfig
 cmake .
 ```
 
-this will allow things like:
-
-
 # Building/Flashing etc
 
 AT this point you should be able to do things like:
 
 ```
-make
+idf.py all
 
-make flash
+idf.py flash
 
-make monitor
+idf.py monitor
 
 # etc
 ```
+
+# Configuring for different boards
+
+The base system currently set up to work on a "FireBeetle 2 ESP32-P4" Board
+
+## To set for a different board:
+
+1. Make sure you use the correct target argument when running
+
+```  idf.py set-target esp32XXXX ```
+
+2. For changes to the standard defaults add/delete/change values in sdkconfig.defaults.  eg
+```
+CONFIG_ESP_CONSOLE_UART_DEFAULT=n
+
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+
+CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
+
+etc
+```
+
+The "FireBeetle 2 ESP32-P4" uses CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+
+ but other boards may require
+
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y instead
+
+
+3. For things like the led GPIO pin, edit default values in main/Kconfig.projbuild eg:
+
+``` 
+    config BLINK_GPIO
+        int "GPIO LED Pin for board"
+        default 3
+        help
+            The GPIO pin that drives the onboard LED
+```
+
 
 # Building an application based on the framework
 
