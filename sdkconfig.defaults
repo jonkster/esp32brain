@@ -1,4 +1,4 @@
-CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
 
 # On chips with USB serial, disable secondary console which does not make sense when using console component
 CONFIG_ESP_CONSOLE_SECONDARY_NONE=y
