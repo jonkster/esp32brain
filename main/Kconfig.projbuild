@@ -1,4 +1,16 @@
-menu "Console Configuration JK"
+menu "ESP32Brain Configuration JK"
+
+    config UNAME
+        string  "System Name"
+        default "Fluffy"
+        help
+            The name of the system.
+
+    config SYSTEM_DESCRIPTION
+        string     "System Description"
+        default "Fluffy ESP32 Brain"
+        help
+            A description of the system.
 
     config CONSOLE_MAX_COMMAND_LINE_LENGTH
         int "Maximum command line length"
@@ -7,4 +19,32 @@ menu "Console Configuration JK"
             This value marks the maximum length of a single command line. Once it is
             reached, no more characters will be accepted by the console.
 
+    config CONSOLE_MAX_CMDLINE_ARGS
+        int "Maximum Command Line Arguments"
+        default 8
+        help
+            This value sets the maximum number of arguments that can be passed
+            to a terminal command
+
+    config BLINK_GPIO
+        int "GPIO LED Pin for board"
+        default 3
+        help
+            The GPIO pin that drives the onboard LED
+
+    config LED_FLASH_PERIOD_MS
+        int "Led Flash interval"
+        default 100
+        help
+            This value sets the time interval in milliseconds between led flashes
+
+    config EXPLODE_ON_RUN
+        bool "should device catch fire and explode?"
+        default TRUE
+        help
+            Test config parameter exists
+
+
 endmenu
+
+

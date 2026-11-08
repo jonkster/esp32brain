@@ -21,6 +21,8 @@ rm kconfigs_projbuild.in
 rm Makefile
 rm -fr managed_components
 rm -fr partition_table
+rm -fr specs
+rm -fr toolchain
 rm partition-table-flash_args
 rm project_description.json
 rm component_manager_run_counter.*
@@ -36,4 +38,30 @@ rm switch.bin
 rm switch.elf
 rm switch.map
 rm x509_crt_bundle.S
+
+rm app-flash_args.in
+rm components_with_manifests_list.temp.overrides
+rm sdkconfig
+rm flasher_args.json.in
+rm hints.yml
+
+rm *.bin
+rm *.c
+rm *.elf
+rm *.map
+
+
+echo ========= REMEMBER =========================
+echo to set up environment:
+echo        eim fix
+echo
+echo then to activate the environment:
+echo        'source "/home/jonk/.espressif/tools/activate_idf_v6.1.sh"   #(or whichever version)'
+echo
+echo  then set the target, eg:
+echo        "idf.py set-target esp32p4   #(or whichever version)"
+echo
+echo  then
+echo       cmake .
+echo ============================================
 

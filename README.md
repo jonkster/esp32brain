@@ -1,4 +1,4 @@
-# ESP32 Device Framework
+# Simple ESP32 Project Framework
 
 I sometimes use an ESP32 board to make a hardware device for controlling
 motors, relays, devices etc.  I usually like to have some way to interact with
@@ -9,12 +9,6 @@ have made a basic template/framework I can re-use.
 
 It is meant to be used as a simple starting point for various projects using
 ESP32 development boards.
-
-In its basic form, it provides some basic functionality including:
-1. a simple terminal/console interface
-2. a 'proof of life' flashing LED system
-3. a multicoloured led alert facility using an onboard RGB led
-4. a skeleton for adding other functionality
 
 This framework uses the Espressif ESP32-IDF environment and is commandline
 focused.
@@ -34,19 +28,13 @@ these examples.
 It hopefully provides a basic foundation that can be built on for applications
 that need console control.
 
-This code assumes a Freenove ESP32 WROOM Development Board:
-![Freenove ESP32-WROOM-S3](https://github.com/jonkster/esp32brain/blob/mainbranch/doc/images/freenove_wroom.jpg)
-
-Using other boards will require minor adjustment (eg LED and RGB LED availability/pins)
-
-
 ## Overview of what it does
 
-Assuming the Freenove ESP32-WROOM board is used, once the board is flashed with
+Assuming the project has been configured to match the development board being used, once the board is flashed with
 the application, the board will flash the LED and you can connect to it via a
 serial monitor: eg
 ```
-make monitor
+idf.py monitor
 # or
 minicom -D /dev/ttyXXXX --color
 # etc
@@ -80,24 +68,11 @@ help  [<string>] [-v <0|1>]
       <string>  Name of command
   -v, --verbose=<0|1>  If specified, list console commands with given verbose level
 
-alert 
-  Flash the alert LED
-
 ps 
   Get information about running tasks
 
 reboot 
   Reboot system
-
-relay_set  nn <0|1>
-  Set state of relay
-    eg: relay_set 2 1
-        set relay #2 on
-
-relay_get  nn
-  Get state of relay
-    eg:relay_get 2
-        get state of relay #2
 
 system 
   Display system information
@@ -111,60 +86,100 @@ version
 esp32-brain> 
 ```
 
+# Getting it up and running
 
-## Setting up development environment
+## To clean up previous builds etc
 
-You need to setup ESP-IDF and then the ESP32Brain framework:
+Assumes you have project code in main/ and a valid CMakeList.txt that defines the project.
 
-### 1. Install ESP-IDF  (@ 2026/10/2026)
+This will clean up all the build and configuration info
 
-**Follow instructions at https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html**
-
-The idea is to install the Espresif Installation Manager (EIM)
-
-Basically process is :
+*NB once done this will require reconfiguration etc (see steps (3)-4-5 below) to allow project to be rebuilt*
 
 ```
-   sudo curl -fsSL https://dl.espressif.com/dl/eim/eim.gpg -o /etc/apt/keyrings/eim.gpg
-   sudo chmod 0644 /etc/apt/keyrings/eim.gpg
-   sudo curl -fsSL https://dl.espressif.com/dl/eim/eim.sources -o /etc/apt/sources.list.d/espressif.sources
-   sudo apt update
-   sudo apt install eim-cli
+./distclean
 ```
 
-NB to update esp-idf at a later date
-```
-sudo apt update && sudo apt upgrade eim
-```
+## 1. To set up the development environment
 
-Then set up for correct ESP32 build environment
-```
-cd ~/esp/esp-idf
-./install.sh esp32
+Assumes eim installed (Espressif Installation Manager)
 
-cd esp-idf/
-. $HOME/esp/esp-idf/export.sh
+```
+eim fix
 ```
 
-### 2. ESP32Brain Framework
+## 2. To activate an environment
 
-Clone this repository.
+```
+source "/home/jonk/.espressif/tools/activate_idf_v6.1.sh"   #(or whichever version you want)
 
-In the cloned repository:
+# you can list known environments using 
+eim list
+```
+
+## 3. To set the esp target
+
+1. Firstly adjust any board specific configuration in sdkconfig.defaults
+2. Build sdkconfig
+
+### To adjust board edit sdkconfig.defaults eg:
+```
+# this for the FireBeetle 2 ESP32-P4 AI Vision Board
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
+```
+
+### To build sdkconfig
+
+First, edit any default values for the board in main/Kconfig.projbuild eg
+```
+    config BLINK_GPIO
+        int "GPIO LED Pin for board"
+        default 3
+        help
+            The GPIO pin that drives the onboard LED
+```
+
+then run:
+
+```
+idf.py set-target esp32p4   #(or whichever version)
+```
+
+*This will build the sdkconfig file.  It will use any default values in the sdkconfig.default file (if it exists)*
+
+
+## 4. To set/adjust configuration
+
+```
+make menuconfig
+```
+
+
+## 5. To generate Makefile
+
 ```
 cmake .
 ```
-This will create Makefile and associated components/directories etc that will allow the project to be built.
+
+this will allow things like:
 
 
-You can now do things like:
+# Building/Flashing etc
+
+AT this point you should be able to do things like:
+
 ```
-make all flash monitor
+make
+
+make flash
+
+make monitor
+
+# etc
 ```
-etc
 
-
-## Building an application based on the framework
+# Building an application based on the framework
 
 Typically edit the main/commands.c file to add your functionality.
 
@@ -207,28 +222,3 @@ Then add this as a command to the registerCommands function  in terminal.c
         ...
 
 ```
-
-
-## Housekeeping
-
-To clean up project to raw essential files:
-```
-distclean.sh
-# Following this, you will need to run:
-cmake .
-# to recreate needed components to allow project to be built
-```
-
-To get a simple generic framework that can be used to build other ESP32 projects, currently use version tagged v0.1 on mainbranch
-```
-git show -s --format='' --color v0.1
-tag v0.1
-Tagger: Jonathan Kelly <jonathan.p.h.kelly@gmail.com>
-
-Use this state as start for other ESP32 projects.
-
-If building other similar ESP32 projects, code at this point can be used
-as a starting point as it is still pretty generic.
-```
-
-

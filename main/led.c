@@ -5,7 +5,7 @@
 
 bool autoBlink = true;
 
-int flashPeriod = LED_FLASH_PERIOD_MS;
+int flashPeriod = CONFIG_LED_FLASH_PERIOD_MS;
 
 void setBlinkPeriod(int period) {
 	flashPeriod = period;
@@ -18,7 +18,7 @@ void setAutoBlink(bool state)
 
 void setMainLedOnOff(bool state)
 {
-	gpio_set_level(LED, !state);
+	gpio_set_level(CONFIG_BLINK_GPIO, !state);
 }
 
 void TaskMainLed(void *pvParameters) {
@@ -26,8 +26,8 @@ void TaskMainLed(void *pvParameters) {
 
 	static bool ledState = true;
 
-	esp_rom_gpio_pad_select_gpio(LED);
-	gpio_set_direction(LED, GPIO_MODE_OUTPUT);
+	esp_rom_gpio_pad_select_gpio(CONFIG_BLINK_GPIO);
+	gpio_set_direction(CONFIG_BLINK_GPIO, GPIO_MODE_OUTPUT);
 
 	for (;;) {
 		if (autoBlink) {

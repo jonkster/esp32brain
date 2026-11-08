@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include "common.h"
-#include "terminal.h"
 #include "led.h"
+#include "terminal.h"
 
 
 void app_main(void)
 {
-	xTaskCreate(TaskMainLed,
+	xTaskCreate(
+			TaskMainLed,
 			"Task Flash" ,
 			configMINIMAL_STACK_SIZE ,
 			NULL,
@@ -15,12 +16,12 @@ void app_main(void)
 		   );
 
 
-	xTaskCreate(TaskTerminal,
+	xTaskCreate(
+			TaskTerminal,
 			"Task Terminal" ,
 			16 * configMINIMAL_STACK_SIZE ,
 			NULL,
 			3 ,
 			NULL
 		   );
-
 }
