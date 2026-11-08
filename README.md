@@ -153,7 +153,7 @@ idf.py set-target esp32p4   #(or whichever version)
 ## 4. To set/adjust configuration
 
 ```
-make menuconfig
+idf.py menuconfig
 ```
 
 
